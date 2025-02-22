@@ -51,7 +51,7 @@ pipeline {
             def services = ['frontend', 'user-service', 'order-service']
             for (service in services) {
                 sh """
-                    docker build -t gcr.io/${PROJECT_ID}/${service}:latest .
+                    docker build -t gcr.io/${PROJECT_ID}:latest .
                     docker tag gcr.io/${PROJECT_ID}/${service}:latest ${service}/
                     docker push gcr.io/${PROJECT_ID}/${service}:latest
                 """
