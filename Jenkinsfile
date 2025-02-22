@@ -44,18 +44,18 @@ pipeline {
         }
 
         stage('Build and Push Docker Images') {
-            steps {
-                script {
-                    def services = ['frontend', 'user-service', 'order-service']
-                    for (service in services) {
-                        sh """
-                            docker build -t $REGISTRY/${service}:latest ${service}/
-                            docker push $REGISTRY/${service}:latest
-                        """
-                    }
-                }
+    steps {
+        script {
+            def services = ['frontend', 'user-service', 'order-service']
+            for (service in services) {
+                sh """
+                    docker build -t us-docker.pkg.dev/automatic-bond-451709-k3/gcr.io/${service}:latest ${service}/
+                    docker push us-docker.pkg.dev/automatic-bond-451709-k3/gcr.io/${service}:latest
+                """
             }
         }
+    }
+}
 
 stage('Deploy to GKE using Helm') {
             steps {
