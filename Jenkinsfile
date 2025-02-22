@@ -60,7 +60,7 @@ pipeline {
 
 stage('Deploy to GKE using Helm') {
             steps {
-                sh "helm upgrade --install $HELM_RELEASE ./helm-chart --set image.repository=$GCR_HOSTNAME/$PROJECT_ID/"
+                sh "helm upgrade --install $HELM_RELEASE ./helm --set image.repository=$GCR_HOSTNAME/$PROJECT_ID/"
             }
         }
     }
