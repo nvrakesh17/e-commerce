@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/your-repo/microservices-app.git'
+                git 'https://github.com/nvrakesh17/e-commerce.git'
             }
         }
 
