@@ -7,7 +7,8 @@ pipeline {
         GKE_ZONE = "us-central1-a"
         REGISTRY = "gcr.io/${PROJECT_ID}"
         K8S_MANIFESTS = "k8s-manifests"
-        GCR_HOSTNAME = "us-docker.pkg.dev" 
+        // GCR_HOSTNAME = "us-docker.pkg.dev"
+        GCR_HOSTNAME = "gcr.io" 
         CREDENTIALS_ID = "github-credentials"
         HELM_RELEASE = 'e-commerce'
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-service-account')
@@ -38,7 +39,8 @@ pipeline {
                 script {
                     withCredentials([file(credentialsId: 'Jenkins-Credentials', variable: 'JENKINS-SA-CREDENTIALS')]) {
                         sh 'gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS'
-                        sh 'gcloud auth configure-docker us-docker.pkg.dev'
+                        // sh 'gcloud auth configure-docker us-docker.pkg.dev'
+                        sh 'gcloud auth configure gcr.io'
                     }
                 }
             }
