@@ -2,12 +2,12 @@ pipeline {
     agent any
 
     environment {
-        PROJECT_ID = "your-gcp-project-id"
+        PROJECT_ID = "automatic-bond-451709-k3"
         GKE_CLUSTER = "microservices-cluster"
         GKE_ZONE = "us-central1-a"
         REGISTRY = "gcr.io/${PROJECT_ID}"
         K8S_MANIFESTS = "k8s-manifests"
-        CREDENTIALS_ID = "Jenkins"
+        CREDENTIALS_ID = "github-credentials"
         HELM_RELEASE = 'e-commerce'
     }
 
