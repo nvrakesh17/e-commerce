@@ -7,6 +7,7 @@ pipeline {
         GKE_ZONE = "us-central1-a"
         REGISTRY = "gcr.io/${PROJECT_ID}"
         K8S_MANIFESTS = "k8s-manifests"
+        GCR_HOSTNAME = "us-docker.pkg.dev" 
         CREDENTIALS_ID = "github-credentials"
         HELM_RELEASE = 'e-commerce'
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-service-account')
