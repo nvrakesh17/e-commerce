@@ -10,7 +10,7 @@ pipeline {
         CREDENTIALS_ID = "github-credentials"
         HELM_RELEASE = 'e-commerce'
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-service-account')
-        JENKINS-SA-CREDENTIALS = credentials('Jenkins-Credentials')
+        JENKINS_SA_CREDENTIALS = credentials('Jenkins-Credentials')
     }
 
     stages {
