@@ -1,0 +1,30 @@
+microservices-based application(Google Kubernetes Engine) cluster. This example consists of:
+
+Frontend Service – A simple Node.js-based frontend.
+User Service – A Python Flask-based service to manage users.
+Order Service – A Python Flask-based service to manage orders.
+MongoDB – A database for storing user and order data
+
+microservices-app/
+│── frontend/
+│   ├── app.js
+│   ├── Dockerfile
+│── user-service/
+│   ├── app.py
+│   ├── Dockerfile
+│── order-service/
+│   ├── app.py
+│   ├── Dockerfile
+│── k8s-manifests/
+│   ├── frontend-deployment.yaml
+│   ├── user-service-deployment.yaml
+│   ├── order-service-deployment.yaml
+│   ├── mongo-deployment.yaml
+│   ├── services.yaml
+│── helm-chart/
+│   ├── Chart.yaml
+│   ├── values.yaml
+│   ├── templates/
+│       ├── deployments.yaml
+│       ├── services.yaml
+
