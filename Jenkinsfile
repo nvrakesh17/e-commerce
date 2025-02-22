@@ -21,7 +21,7 @@ pipeline {
         stage('Authenticate with GCP') {
             steps {
                 script {
-                    withCredentials([file(credentialsId: CREDENTIALS_ID, variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
+                    withCredentials([usernamePassword(credentialsId: 'github-credentials', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
                         sh 'gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS'
                         sh 'gcloud config set project $PROJECT_ID'
                         sh 'gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE'
