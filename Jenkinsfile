@@ -8,6 +8,7 @@ pipeline {
         REGISTRY = "gcr.io/${PROJECT_ID}"
         K8S_MANIFESTS = "k8s-manifests"
         CREDENTIALS_ID = "Jenkins"
+        HELM_RELEASE = 'e-commerce'
     }
 
     stages {
@@ -43,12 +44,18 @@ pipeline {
             }
         }
 
-        stage('Deploy to GKE') {
+stage('Deploy to GKE using Helm') {
             steps {
-                script {
-                    sh "kubectl apply -f $K8S_MANIFESTS/"
-                }
+                sh "helm upgrade --install $HELM_RELEASE ./helm-chart --set image.repository=$GCR_HOSTNAME/$PROJECT_ID/"
             }
+        }
+    }
+    post {
+        success {
+            echo 'Deployment successful!'
+        }
+        failure {
+            echo 'Deployment failed! Check the logs for errors.'
         }
     }
 }

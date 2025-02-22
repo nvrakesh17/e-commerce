@@ -5,7 +5,7 @@ User Service – A Python Flask-based service to manage users.
 Order Service – A Python Flask-based service to manage orders.
 MongoDB – A database for storing user and order data
 
-microservices-app/
+e-commerce/
 │── frontend/
 │   ├── app.js
 │   ├── Dockerfile
