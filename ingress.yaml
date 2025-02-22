@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: microservices-ingress
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    networking.gke.io/managed-certificates: "my-cert"  # Optional for HTTPS
+spec:
+  rules:
+  - host: e-commerce.com  # Change this to your domain or remove for IP-based access
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend  # Replace with your frontend service name
+            port:
+              number: 80
+      - path: /api/user
+        pathType: Prefix
+        backend:
+          service:
+            name: user-service
+            port:
+              number: 8080
+      - path: /api/order
+        pathType: Prefix
+        backend:
+          service:
+            name: order-service
+            port:
+              number: 8080

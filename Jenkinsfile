@@ -7,7 +7,7 @@ pipeline {
         GKE_ZONE = "us-central1-a"
         REGISTRY = "gcr.io/${PROJECT_ID}"
         K8S_MANIFESTS = "k8s-manifests"
-        GCR_HOSTNAME = "us-docker.pkg.dev" 
+        GCR_HOSTNAME = "gcr.io/${PROJECT_ID}" 
         CREDENTIALS_ID = "github-credentials"
         HELM_RELEASE = 'e-commerce'
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-service-account')
@@ -39,6 +39,7 @@ pipeline {
                     withCredentials([file(credentialsId: 'Jenkins-Credentials', variable: 'JENKINS-SA-CREDENTIALS')]) {
                         sh 'gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS'
                         sh 'gcloud auth configure-docker us-docker.pkg.dev'
+                        sh 'gcloud auth configure-docker gcr.io'
                     }
                 }
             }
@@ -50,8 +51,9 @@ pipeline {
             def services = ['frontend', 'user-service', 'order-service']
             for (service in services) {
                 sh """
-                    docker build -t us-docker.pkg.dev/automatic-bond-451709-k3/gcr.io/${service}:latest ${service}/
-                    docker push us-docker.pkg.dev/automatic-bond-451709-k3/gcr.io/${service}:latest
+                    docker build -t gcr.io/${PROJECT_ID}/${service}:latest .
+                    docker tag gcr.io/${PROJECT_ID}/${service}:latest ${service}/
+                    docker push gcr.io/${PROJECT_ID}/${service}:latest
                 """
             }
         }
