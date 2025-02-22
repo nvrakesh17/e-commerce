@@ -9,6 +9,7 @@ pipeline {
         K8S_MANIFESTS = "k8s-manifests"
         CREDENTIALS_ID = "github-credentials"
         HELM_RELEASE = 'e-commerce'
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-service-account')
     }
 
     stages {
