@@ -10,6 +10,7 @@ pipeline {
         CREDENTIALS_ID = "github-credentials"
         HELM_RELEASE = 'e-commerce'
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-service-account')
+        JENKINS-SA-CREDENTIALS = credentials('Jenkins-Credentials')
     }
 
     stages {
@@ -26,6 +27,17 @@ pipeline {
                         sh 'gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS'
                         sh 'gcloud config set project $PROJECT_ID'
                         sh 'gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE'
+                    }
+                }
+            }
+        }
+
+        stage('Authenticate with Google Artifact Registry') {
+            steps {
+                script {
+                    withCredentials([file(credentialsId: 'Jenkins-Credentials', variable: 'JENKINS-SA-CREDENTIALS')]) {
+                        sh 'gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS'
+                        sh 'gcloud auth configure-docker us-docker.pkg.dev'
                     }
                 }
             }
