@@ -40,7 +40,7 @@ pipeline {
                     withCredentials([file(credentialsId: 'Jenkins-Credentials', variable: 'JENKINS-SA-CREDENTIALS')]) {
                         sh 'gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS'
                         // sh 'gcloud auth configure-docker us-docker.pkg.dev'
-                        sh 'gcloud auth configure gcr.io'
+                        sh 'gcloud auth configure-docker gcr.io'
                     }
                 }
             }
