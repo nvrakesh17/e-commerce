@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+spec:
+  selector:
+    app: frontend
+  ports:
+    - protocol: TCP
+      port: {{ .Values.service.frontend.port }}
+      targetPort: {{ .Values.service.frontend.targetPort }}
+  type: {{ .Values.service.frontend.type }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+spec:
+  selector:
+    app: user-service
+  ports:
+    - protocol: TCP
+      port: {{ .Values.service.userService.port }}
+      targetPort: {{ .Values.service.userService.port }}
+  type: {{ .Values.service.userService.type }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-service
+spec:
+  selector:
+    app: order-service
+  ports:
+    - protocol: TCP
+      port: {{ .Values.service.orderService.port }}
+      targetPort: {{ .Values.service.orderService.port }}
+  type: {{ .Values.service.orderService.type }}

@@ -1,0 +1,4 @@
+apiVersion: v2
+name: microservices-app
+version: 1.0.0
+description: A Helm chart for deploying a microservices-based application

@@ -1,0 +1,25 @@
+replicaCount: 2
+
+image:
+  repository: gcr.io/<PROJECT_ID>/
+  frontend: frontend
+  userService: user-service
+  orderService: order-service
+  tag: latest
+
+service:
+  frontend:
+    type: LoadBalancer
+    port: 80
+    targetPort: 3000
+  userService:
+    type: ClusterIP
+    port: 5001
+  orderService:
+    type: ClusterIP
+    port: 5002
+
+db:
+  mongo:
+    image: mongo
+    port: 27017
